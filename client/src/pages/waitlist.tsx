@@ -10,59 +10,59 @@ import { Check, Loader2, CheckCircle2, Spade } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
 const countryCodes = [
-  { code: "+1", country: "🇺🇸 United States", flag: "🇺🇸" },
-  { code: "+1", country: "🇨🇦 Canada", flag: "🇨🇦" },
-  { code: "+44", country: "🇬🇧 United Kingdom", flag: "🇬🇧" },
-  { code: "+61", country: "🇦🇺 Australia", flag: "🇦🇺" },
-  { code: "+91", country: "🇮🇳 India", flag: "🇮🇳" },
-  { code: "+86", country: "🇨🇳 China", flag: "🇨🇳" },
-  { code: "+81", country: "🇯🇵 Japan", flag: "🇯🇵" },
-  { code: "+49", country: "🇩🇪 Germany", flag: "🇩🇪" },
-  { code: "+33", country: "🇫🇷 France", flag: "🇫🇷" },
-  { code: "+39", country: "🇮🇹 Italy", flag: "🇮🇹" },
-  { code: "+34", country: "🇪🇸 Spain", flag: "🇪🇸" },
-  { code: "+7", country: "🇷🇺 Russia", flag: "🇷🇺" },
-  { code: "+82", country: "🇰🇷 South Korea", flag: "🇰🇷" },
-  { code: "+55", country: "🇧🇷 Brazil", flag: "🇧🇷" },
-  { code: "+52", country: "🇲🇽 Mexico", flag: "🇲🇽" },
-  { code: "+27", country: "🇿🇦 South Africa", flag: "🇿🇦" },
-  { code: "+234", country: "🇳🇬 Nigeria", flag: "🇳🇬" },
-  { code: "+20", country: "🇪🇬 Egypt", flag: "🇪🇬" },
-  { code: "+90", country: "🇹🇷 Turkey", flag: "🇹🇷" },
-  { code: "+971", country: "🇦🇪 UAE", flag: "🇦🇪" },
-  { code: "+966", country: "🇸🇦 Saudi Arabia", flag: "🇸🇦" },
-  { code: "+65", country: "🇸🇬 Singapore", flag: "🇸🇬" },
-  { code: "+60", country: "🇲🇾 Malaysia", flag: "🇲🇾" },
-  { code: "+62", country: "🇮🇩 Indonesia", flag: "🇮🇩" },
-  { code: "+63", country: "🇵🇭 Philippines", flag: "🇵🇭" },
-  { code: "+66", country: "🇹🇭 Thailand", flag: "🇹🇭" },
-  { code: "+84", country: "🇻🇳 Vietnam", flag: "🇻🇳" },
-  { code: "+880", country: "🇧🇩 Bangladesh", flag: "🇧🇩" },
-  { code: "+92", country: "🇵🇰 Pakistan", flag: "🇵🇰" },
-  { code: "+64", country: "🇳🇿 New Zealand", flag: "🇳🇿" },
-  { code: "+31", country: "🇳🇱 Netherlands", flag: "🇳🇱" },
-  { code: "+46", country: "🇸🇪 Sweden", flag: "🇸🇪" },
-  { code: "+47", country: "🇳🇴 Norway", flag: "🇳🇴" },
-  { code: "+45", country: "🇩🇰 Denmark", flag: "🇩🇰" },
-  { code: "+358", country: "🇫🇮 Finland", flag: "🇫🇮" },
-  { code: "+48", country: "🇵🇱 Poland", flag: "🇵🇱" },
-  { code: "+41", country: "🇨🇭 Switzerland", flag: "🇨🇭" },
-  { code: "+43", country: "🇦🇹 Austria", flag: "🇦🇹" },
-  { code: "+32", country: "🇧🇪 Belgium", flag: "🇧🇪" },
-  { code: "+351", country: "🇵🇹 Portugal", flag: "🇵🇹" },
-  { code: "+30", country: "🇬🇷 Greece", flag: "🇬🇷" },
-  { code: "+420", country: "🇨🇿 Czech Republic", flag: "🇨🇿" },
-  { code: "+36", country: "🇭🇺 Hungary", flag: "🇭🇺" },
-  { code: "+40", country: "🇷🇴 Romania", flag: "🇷🇴" },
-  { code: "+353", country: "🇮🇪 Ireland", flag: "🇮🇪" },
-  { code: "+972", country: "🇮🇱 Israel", flag: "🇮🇱" },
-  { code: "+852", country: "🇭🇰 Hong Kong", flag: "🇭🇰" },
-  { code: "+886", country: "🇹🇼 Taiwan", flag: "🇹🇼" },
-  { code: "+56", country: "🇨🇱 Chile", flag: "🇨🇱" },
-  { code: "+54", country: "🇦🇷 Argentina", flag: "🇦🇷" },
-  { code: "+57", country: "🇨🇴 Colombia", flag: "🇨🇴" },
-  { code: "+51", country: "🇵🇪 Peru", flag: "🇵🇪" },
-  { code: "+58", country: "🇻🇪 Venezuela", flag: "🇻🇪" },
+  { code: "+1", country: "🇺🇸 United States", flag: "🇺🇸", areaCode: "+1" },
+  { code: "+1", country: "🇨🇦 Canada", flag: "🇨🇦", areaCode: "+1" },
+  { code: "+44", country: "🇬🇧 United Kingdom", flag: "🇬🇧", areaCode: "+44" },
+  { code: "+61", country: "🇦🇺 Australia", flag: "🇦🇺", areaCode: "+61" },
+  { code: "+91", country: "🇮🇳 India", flag: "🇮🇳", areaCode: "+91" },
+  { code: "+86", country: "🇨🇳 China", flag: "🇨🇳", areaCode: "+86" },
+  { code: "+81", country: "🇯🇵 Japan", flag: "🇯🇵", areaCode: "+81" },
+  { code: "+49", country: "🇩🇪 Germany", flag: "🇩🇪", areaCode: "+49" },
+  { code: "+33", country: "🇫🇷 France", flag: "🇫🇷", areaCode: "+33" },
+  { code: "+39", country: "🇮🇹 Italy", flag: "🇮🇹", areaCode: "+39" },
+  { code: "+34", country: "🇪🇸 Spain", flag: "🇪🇸", areaCode: "+34" },
+  { code: "+7", country: "🇷🇺 Russia", flag: "🇷🇺", areaCode: "+7" },
+  { code: "+82", country: "🇰🇷 South Korea", flag: "🇰🇷", areaCode: "+82" },
+  { code: "+55", country: "🇧🇷 Brazil", flag: "🇧🇷", areaCode: "+55" },
+  { code: "+52", country: "🇲🇽 Mexico", flag: "🇲🇽", areaCode: "+52" },
+  { code: "+27", country: "🇿🇦 South Africa", flag: "🇿🇦", areaCode: "+27" },
+  { code: "+234", country: "🇳🇬 Nigeria", flag: "🇳🇬", areaCode: "+234" },
+  { code: "+20", country: "🇪🇬 Egypt", flag: "🇪🇬", areaCode: "+20" },
+  { code: "+90", country: "🇹🇷 Turkey", flag: "🇹🇷", areaCode: "+90" },
+  { code: "+971", country: "🇦🇪 UAE", flag: "🇦🇪", areaCode: "+971" },
+  { code: "+966", country: "🇸🇦 Saudi Arabia", flag: "🇸🇦", areaCode: "+966" },
+  { code: "+65", country: "🇸🇬 Singapore", flag: "🇸🇬", areaCode: "+65" },
+  { code: "+60", country: "🇲🇾 Malaysia", flag: "🇲🇾", areaCode: "+60" },
+  { code: "+62", country: "🇮🇩 Indonesia", flag: "🇮🇩", areaCode: "+62" },
+  { code: "+63", country: "🇵🇭 Philippines", flag: "🇵🇭", areaCode: "+63" },
+  { code: "+66", country: "🇹🇭 Thailand", flag: "🇹🇭", areaCode: "+66" },
+  { code: "+84", country: "🇻🇳 Vietnam", flag: "🇻🇳", areaCode: "+84" },
+  { code: "+880", country: "🇧🇩 Bangladesh", flag: "🇧🇩", areaCode: "+880" },
+  { code: "+92", country: "🇵🇰 Pakistan", flag: "🇵🇰", areaCode: "+92" },
+  { code: "+64", country: "🇳🇿 New Zealand", flag: "🇳🇿", areaCode: "+64" },
+  { code: "+31", country: "🇳🇱 Netherlands", flag: "🇳🇱", areaCode: "+31" },
+  { code: "+46", country: "🇸🇪 Sweden", flag: "🇸🇪", areaCode: "+46" },
+  { code: "+47", country: "🇳🇴 Norway", flag: "🇳🇴", areaCode: "+47" },
+  { code: "+45", country: "🇩🇰 Denmark", flag: "🇩🇰", areaCode: "+45" },
+  { code: "+358", country: "🇫🇮 Finland", flag: "🇫🇮", areaCode: "+358" },
+  { code: "+48", country: "🇵🇱 Poland", flag: "🇵🇱", areaCode: "+48" },
+  { code: "+41", country: "🇨🇭 Switzerland", flag: "🇨🇭", areaCode: "+41" },
+  { code: "+43", country: "🇦🇹 Austria", flag: "🇦🇹", areaCode: "+43" },
+  { code: "+32", country: "🇧🇪 Belgium", flag: "🇧🇪", areaCode: "+32" },
+  { code: "+351", country: "🇵🇹 Portugal", flag: "🇵🇹", areaCode: "+351" },
+  { code: "+30", country: "🇬🇷 Greece", flag: "🇬🇷", areaCode: "+30" },
+  { code: "+420", country: "🇨🇿 Czech Republic", flag: "🇨🇿", areaCode: "+420" },
+  { code: "+36", country: "🇭🇺 Hungary", flag: "🇭🇺", areaCode: "+36" },
+  { code: "+40", country: "🇷🇴 Romania", flag: "🇷🇴", areaCode: "+40" },
+  { code: "+353", country: "🇮🇪 Ireland", flag: "🇮🇪", areaCode: "+353" },
+  { code: "+972", country: "🇮🇱 Israel", flag: "🇮🇱", areaCode: "+972" },
+  { code: "+852", country: "🇭🇰 Hong Kong", flag: "🇭🇰", areaCode: "+852" },
+  { code: "+886", country: "🇹🇼 Taiwan", flag: "🇹🇼", areaCode: "+886" },
+  { code: "+56", country: "🇨🇱 Chile", flag: "🇨🇱", areaCode: "+56" },
+  { code: "+54", country: "🇦🇷 Argentina", flag: "🇦🇷", areaCode: "+54" },
+  { code: "+57", country: "🇨🇴 Colombia", flag: "🇨🇴", areaCode: "+57" },
+  { code: "+51", country: "🇵🇪 Peru", flag: "🇵🇪", areaCode: "+51" },
+  { code: "+58", country: "🇻🇪 Venezuela", flag: "🇻🇪", areaCode: "+58" },
 ];
 
 // Phone number formatter
@@ -117,9 +117,9 @@ export default function WaitlistPage() {
               </div>
               <span className="text-3xl font-bold bg-gradient-to-r from-primary to-primary/80 bg-clip-text text-transparent">BACCARAT</span>
             </div>
-            <div className="text-sm text-accent uppercase tracking-[0.3em] mb-6 font-semibold">EXCLUSIVE ELITE WAITLIST</div>
+            <div className="text-sm text-accent uppercase tracking-[0.3em] mb-6 font-semibold">EXCLUSIVE BETTING WAITLIST</div>
             <h1 className="text-3xl md:text-4xl font-bold text-foreground mb-6 leading-tight">
-              Join the most successful baccarat players. Get premium strategies with{" "}
+              Join the most successful baccarat blueprints. Get premium strategies with{" "}
               <span className="text-primary drop-shadow-[0_0_15px_rgba(239,68,68,0.5)]">99.2% accuracy.</span>
             </h1>
 
@@ -130,12 +130,12 @@ export default function WaitlistPage() {
                 <div className="text-xs text-muted-foreground uppercase tracking-wider">Success Rate</div>
               </div>
               <div className="backdrop-blur-xl bg-card/80 border border-card-border rounded-2xl px-8 py-4 shadow-2xl shadow-accent/20 hover:shadow-accent/40 transition-shadow">
-                <div className="text-3xl font-bold text-accent mb-1 drop-shadow-[0_0_10px_rgba(251,191,36,0.6)]">$500K+</div>
-                <div className="text-xs text-muted-foreground uppercase tracking-wider">Wins Per Month</div>
+                <div className="text-3xl font-bold text-accent mb-1 drop-shadow-[0_0_10px_rgba(251,191,36,0.6)]">GLOBAL</div>
+                <div className="text-xs text-muted-foreground uppercase tracking-wider">Strategies work globally</div>
               </div>
               <div className="backdrop-blur-xl bg-card/80 border border-card-border rounded-2xl px-8 py-4 shadow-2xl shadow-primary/20 hover:shadow-primary/40 transition-shadow">
                 <div className="text-3xl font-bold text-primary mb-1 drop-shadow-[0_0_10px_rgba(239,68,68,0.6)]">24/7</div>
-                <div className="text-xs text-muted-foreground uppercase tracking-wider">Coverage</div>
+                <div className="text-xs text-muted-foreground uppercase tracking-wider">LIVE EDUCATION</div>
               </div>
             </div>
           </div>
@@ -147,10 +147,10 @@ export default function WaitlistPage() {
             </div>
             
             <h2 className="text-3xl font-bold text-foreground mb-4">
-              Welcome to the Elite!
+              Registration Complete!
             </h2>
             <p className="text-muted-foreground text-lg mb-10 leading-relaxed">
-              You're now on our exclusive waitlist. We'll notify you when premium baccarat strategies become available.
+              Your waitlist application has been successfully submitted. Our admin team will review your application and notify you once approved.
             </p>
 
             <div className="backdrop-blur-xl bg-background/60 border border-border rounded-2xl p-6 mb-8 shadow-xl shadow-primary/10">
@@ -159,9 +159,9 @@ export default function WaitlistPage() {
                   <Check className="w-4 h-4 text-primary" />
                 </div>
                 <div>
-                  <div className="font-semibold text-foreground text-lg mb-2 drop-shadow-[0_0_8px_rgba(239,68,68,0.3)]">ELITE ACCESS SECURED</div>
+                  <div className="font-semibold text-foreground text-lg mb-2 drop-shadow-[0_0_8px_rgba(239,68,68,0.3)]">APPLICATION RECEIVED</div>
                   <div className="text-sm text-muted-foreground leading-relaxed">
-                    You'll be among the first to get premium baccarat strategies and exclusive table access
+                    An admin will review your waitlist application. You'll receive an email notification once you're approved for premium baccarat strategies and exclusive table access.
                   </div>
                 </div>
               </div>
@@ -169,9 +169,9 @@ export default function WaitlistPage() {
 
             <div className="text-right">
               <p className="text-xs text-muted-foreground leading-relaxed">
-                Success!<br />
-                You've been added to our waitlist.<br />
-                We'll notify you when we launch!
+                Thank you!<br />
+                We'll review your application shortly.<br />
+                Check your email for updates.
               </p>
             </div>
           </div>
@@ -191,9 +191,9 @@ export default function WaitlistPage() {
             </div>
             <span className="text-3xl font-bold bg-gradient-to-r from-primary to-primary/80 bg-clip-text text-transparent">BACCARAT</span>
           </div>
-          <div className="text-sm text-accent uppercase tracking-[0.3em] mb-6 font-semibold drop-shadow-[0_0_10px_rgba(251,191,36,0.5)]">EXCLUSIVE ELITE WAITLIST</div>
+          <div className="text-sm text-accent uppercase tracking-[0.3em] mb-6 font-semibold drop-shadow-[0_0_10px_rgba(251,191,36,0.5)]">EXCLUSIVE BETTING WAITLIST</div>
           <h1 className="text-3xl md:text-4xl font-bold text-foreground mb-6 leading-tight">
-            Join the most successful baccarat players. Get premium strategies with{" "}
+            Join the most successful baccarat blueprints. Get premium strategies with{" "}
             <span className="text-primary drop-shadow-[0_0_15px_rgba(239,68,68,0.5)]">99.2% accuracy.</span>
           </h1>
 
@@ -204,12 +204,12 @@ export default function WaitlistPage() {
               <div className="text-xs text-muted-foreground uppercase tracking-wider">Success Rate</div>
             </div>
             <div className="backdrop-blur-xl bg-card/80 border border-card-border rounded-2xl px-8 py-4 shadow-2xl shadow-accent/20 hover:shadow-accent/40 transition-shadow">
-              <div className="text-3xl font-bold text-accent mb-1 drop-shadow-[0_0_10px_rgba(251,191,36,0.6)]">$500K+</div>
-              <div className="text-xs text-muted-foreground uppercase tracking-wider">Wins Per Month</div>
+              <div className="text-3xl font-bold text-accent mb-1 drop-shadow-[0_0_10px_rgba(251,191,36,0.6)]">GLOBAL</div>
+              <div className="text-xs text-muted-foreground uppercase tracking-wider">Strategies work globally</div>
             </div>
             <div className="backdrop-blur-xl bg-card/80 border border-card-border rounded-2xl px-8 py-4 shadow-2xl shadow-primary/20 hover:shadow-primary/40 transition-shadow">
               <div className="text-3xl font-bold text-primary mb-1 drop-shadow-[0_0_10px_rgba(239,68,68,0.6)]">24/7</div>
-              <div className="text-xs text-muted-foreground uppercase tracking-wider">Coverage</div>
+              <div className="text-xs text-muted-foreground uppercase tracking-wider">LIVE EDUCATION</div>
             </div>
           </div>
 
@@ -220,7 +220,7 @@ export default function WaitlistPage() {
                 <Check className="w-3 h-3 text-primary" />
               </div>
               <div className="text-left">
-                <div className="font-semibold text-foreground mb-1 drop-shadow-[0_0_8px_rgba(239,68,68,0.3)]">REAL-TIME BACCARAT SIGNALS</div>
+                <div className="font-semibold text-foreground mb-1 drop-shadow-[0_0_8px_rgba(239,68,68,0.3)]">Real-Time Baccarat video content</div>
                 <div className="text-muted-foreground">Advanced pattern analysis & table insights</div>
               </div>
             </div>
@@ -318,27 +318,32 @@ export default function WaitlistPage() {
                         </SelectTrigger>
                         <SelectContent className="max-h-[300px]">
                           {countryCodes.map((item, index) => (
-                            <SelectItem key={`${item.code}-${index}`} value={item.code}>
+                            <SelectItem key={`${item.country}-${index}`} value={item.code}>
                               {item.country}
                             </SelectItem>
                           ))}
                         </SelectContent>
                       </Select>
-                      <FormControl>
-                        <Input
-                          {...field}
-                          type="tel"
-                          placeholder="123-456-7890"
-                          value={field.value}
-                          onChange={(e) => {
-                            const formatted = formatPhoneNumber(e.target.value);
-                            field.onChange(formatted);
-                          }}
-                          maxLength={12}
-                          className="flex-1 bg-background border-border text-foreground h-12 rounded-xl shadow-sm focus:ring-2 focus:ring-primary/50 focus:shadow-lg focus:shadow-primary/30 transition-all"
-                          data-testid="input-phone"
-                        />
-                      </FormControl>
+                      <div className="relative flex-1">
+                        <span className="absolute left-4 top-1/2 -translate-y-1/2 text-muted-foreground text-sm font-medium pointer-events-none">
+                          {selectedCountryCode}
+                        </span>
+                        <FormControl>
+                          <Input
+                            {...field}
+                            type="tel"
+                            placeholder="123-456-7890"
+                            value={field.value}
+                            onChange={(e) => {
+                              const formatted = formatPhoneNumber(e.target.value);
+                              field.onChange(formatted);
+                            }}
+                            maxLength={12}
+                            className="flex-1 bg-background border-border text-foreground h-12 rounded-xl shadow-sm focus:ring-2 focus:ring-primary/50 focus:shadow-lg focus:shadow-primary/30 transition-all pl-16"
+                            data-testid="input-phone"
+                          />
+                        </FormControl>
+                      </div>
                     </div>
                     <FormMessage />
                   </FormItem>
