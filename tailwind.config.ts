@@ -124,6 +124,8 @@ export default {
       backgroundImage: {
         "gold-gradient": "linear-gradient(135deg, #F59E0B 0%, #D97706 100%)",
         "glass-gradient": "linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%)",
+        "cyan-gradient": "linear-gradient(135deg, #06B6D4 0%, #0891B2 100%)",
+        "red-gradient": "linear-gradient(135deg, #DC2626 0%, #991B1B 100%)",
       },
     },
   },
