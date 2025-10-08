@@ -1,0 +1,43 @@
+type User @table {
+  email: String!
+  displayName: String!
+  userType: String!
+  createdAt: Timestamp!
+  phoneNumber: String
+  address: String
+}
+
+type Customer @table {
+  name: String!
+  address: String!
+  createdAt: Timestamp!
+  phoneNumber: String
+  email: String
+}
+
+type Distribution @table {
+  distributionNumber: String!
+  deliveryAddress: String!
+  status: String!
+  createdAt: Timestamp!
+  assignedDriver: User
+  customer: Customer
+  notes: String
+  scheduledDeliveryDate: Date
+}
+
+type Item @table {
+  name: String!
+  quantity: Int!
+  distribution: Distribution
+  description: String
+  unitPrice: Float
+}
+
+type StatusUpdate @table {
+  newStatus: String!
+  timestamp: Timestamp!
+  distribution: Distribution
+  updatedBy: User
+  notes: String
+}

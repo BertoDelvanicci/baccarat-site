@@ -1,0 +1,24 @@
+mutation InsertDistribution @auth(level: USER) {
+  distribution_insert(data: { deliveryAddress: "123 Main St", distributionNumber: "DIST-001", status: "Pending" })
+}
+
+query GetDistributions @auth(level: USER) {
+  distributions {
+    id
+    deliveryAddress
+    distributionNumber
+    status
+  }
+}
+
+mutation UpdateDistributionStatus($id: UUID!, $status: String!) @auth(level: USER) {
+  distribution_update(key: { id: $id }, data: { status: $status })
+}
+
+query GetUsers @auth(level: USER) {
+  users {
+    id
+    displayName
+    email
+  }
+}
