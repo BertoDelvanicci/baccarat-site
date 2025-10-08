@@ -4,6 +4,32 @@
 
 /* LIGHT MODE */
 :root {
+  --button-outline: rgba(255, 0, 0, 0.15);
+  --badge-outline: rgba(255, 0, 0, 0.1);
+
+  --opaque-button-border-intensity: -10;
+
+  --elevate-1: rgba(255, 0, 0, 0.05);
+  --elevate-2: rgba(255, 0, 0, 0.15);
+
+  --background: 0 0% 98%;
+  --foreground: 0 0% 10%;
+  --border: 0 85% 90%;
+
+  --card: 0 100% 99%;
+  --card-foreground: 0 0% 15%;
+  --card-border: 0 80% 92%;
+
+  --sidebar: 0 80% 96%;
+  --sidebar-foreground: 0 0% 10%;
+  --sidebar-border: 0 80% 92%;
+
+  --sidebar-primary: 0 85% 50%; /* vibrant red */
+  --sidebar-primary-foreground: 0 100% 98%;
+
+  --sidebar-accent: 0 90% 45%; /* accent red */
+}
+root {
   --button-outline: rgba(0,0,0, .10);
   --badge-outline: rgba(0,0,0, .05);
 
@@ -526,7 +552,7 @@ html, body {
   }
 
   /* Fix cards overflow */
-  .rounded-3xl, .rounded-2xl {
+  .roundexd-3xl, .rounded-2xl {
     border-radius: 1rem !important;
   }
 
@@ -541,4 +567,27 @@ html, body {
 }
 
 /* --- END MOBILE FIXES --- */
+npm run dev
+
+http://localhost:3000
+
+git add src/index.css
+git commit -m "Finalize red theme and mobile fixes"
+git push origin main
+
+cd client
+
+git add src/index.css
+
+git commit -m "Finalize red color scheme and mobile responsiveness fixes"
+
+git push origin main
+
+cd ..
+firebase deploy
+
+cd client
+
+firebase deploy --only hosting
+
 
