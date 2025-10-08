@@ -9,9 +9,18 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { Check, Loader2, Crown } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
+// ✅ Firestore Imports
+import { getFirestore, collection, addDoc, serverTimestamp } from "firebase/firestore";
+import { initializeApp } from "firebase/app";
+import firebaseConfig from "@/../firebaseConfig"; // <-- adjust this path if needed
+
 interface WaitlistFormProps {
   onSuccess?: () => void;
 }
+
+// ✅ Initialize Firebase (safe to call multiple times)
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
 
 export default function WaitlistForm({ onSuccess }: WaitlistFormProps) {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -31,20 +40,37 @@ export default function WaitlistForm({ onSuccess }: WaitlistFormProps) {
 
   const onSubmit = async (data: InsertWaitlist) => {
     setIsSubmitting(true);
-    // TODO: Replace with actual Firebase integration
-    console.log("Waitlist signup:", { ...data, phone: `${selectedCountryCode}${data.phone}` });
-    
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 1500));
-    
-    setIsSubmitting(false);
-    toast({
-      title: "Welcome to Baccarat Elite!",
-      description: "You've been added to our exclusive waitlist. Check your email for confirmation.",
-    });
-    
-    if (onSuccess) {
-      onSuccess();
+
+    try {
+      const fullPhone = `${selectedCountryCode}${data.phone}`;
+      const waitlistRef = collection(db, "waitlist");
+
+      // ✅ Save data to Firestore
+     await addDoc(collection(db, "waitlist_submissions"), {
+        fullName: data.fullName,
+        email: data.email,
+        phone: fullPhone,
+        experienceLevel: data.experienceLevel,
+        referralCode: data.referralCode || null,
+        joinedAt: serverTimestamp(),
+      });
+
+      toast({
+        title: "Welcome to Baccarat Elite!",
+        description: "You've been added to our exclusive waitlist. Check your email for confirmation.",
+      });
+
+      form.reset();
+      if (onSuccess) onSuccess();
+    } catch (error) {
+      console.error("Error adding to waitlist:", error);
+      toast({
+        title: "Error",
+        description: "Something went wrong. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -62,7 +88,7 @@ export default function WaitlistForm({ onSuccess }: WaitlistFormProps) {
     <div className="relative backdrop-blur-2xl bg-white/5 rounded-3xl p-8 md:p-12 border border-white/20 shadow-2xl">
       {/* Glow Effect */}
       <div className="absolute -inset-px bg-gradient-to-r from-primary/20 to-yellow-500/20 rounded-3xl blur-xl opacity-50" />
-      
+
       <div className="relative">
         {/* Form Header */}
         <div className="text-center mb-8">
@@ -87,12 +113,7 @@ export default function WaitlistForm({ onSuccess }: WaitlistFormProps) {
                 <FormItem>
                   <FormLabel className="text-foreground font-medium">Full Name *</FormLabel>
                   <FormControl>
-                    <Input
-                      {...field}
-                      placeholder="John Doe"
-                      className="bg-white/5 border-white/20 text-foreground placeholder:text-foreground/40 focus:ring-2 focus:ring-primary/50 h-12 rounded-xl"
-                      data-testid="input-fullname"
-                    />
+                    <Input {...field} placeholder="John Doe" className="bg-white/5 border-white/20 text-foreground placeholder:text-foreground/40 focus:ring-2 focus:ring-primary/50 h-12 rounded-xl" />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -107,13 +128,7 @@ export default function WaitlistForm({ onSuccess }: WaitlistFormProps) {
                 <FormItem>
                   <FormLabel className="text-foreground font-medium">Email Address *</FormLabel>
                   <FormControl>
-                    <Input
-                      {...field}
-                      type="email"
-                      placeholder="john@example.com"
-                      className="bg-white/5 border-white/20 text-foreground placeholder:text-foreground/40 focus:ring-2 focus:ring-primary/50 h-12 rounded-xl"
-                      data-testid="input-email"
-                    />
+                    <Input {...field} type="email" placeholder="john@example.com" className="bg-white/5 border-white/20 text-foreground placeholder:text-foreground/40 focus:ring-2 focus:ring-primary/50 h-12 rounded-xl" />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -129,7 +144,7 @@ export default function WaitlistForm({ onSuccess }: WaitlistFormProps) {
                   <FormLabel className="text-foreground font-medium">Phone Number *</FormLabel>
                   <div className="flex gap-2">
                     <Select value={selectedCountryCode} onValueChange={setSelectedCountryCode}>
-                      <SelectTrigger className="w-32 bg-white/5 border-white/20 text-foreground h-12 rounded-xl" data-testid="select-country">
+                      <SelectTrigger className="w-32 bg-white/5 border-white/20 text-foreground h-12 rounded-xl">
                         <SelectValue />
                       </SelectTrigger>
                       <SelectContent>
@@ -141,13 +156,7 @@ export default function WaitlistForm({ onSuccess }: WaitlistFormProps) {
                       </SelectContent>
                     </Select>
                     <FormControl>
-                      <Input
-                        {...field}
-                        type="tel"
-                        placeholder="555-123-4567"
-                        className="flex-1 bg-white/5 border-white/20 text-foreground placeholder:text-foreground/40 focus:ring-2 focus:ring-primary/50 h-12 rounded-xl"
-                        data-testid="input-phone"
-                      />
+                      <Input {...field} type="tel" placeholder="555-123-4567" className="flex-1 bg-white/5 border-white/20 text-foreground placeholder:text-foreground/40 focus:ring-2 focus:ring-primary/50 h-12 rounded-xl" />
                     </FormControl>
                   </div>
                   <FormMessage />
@@ -164,7 +173,7 @@ export default function WaitlistForm({ onSuccess }: WaitlistFormProps) {
                   <FormLabel className="text-foreground font-medium">Baccarat Experience *</FormLabel>
                   <Select onValueChange={field.onChange} defaultValue={field.value}>
                     <FormControl>
-                      <SelectTrigger className="bg-white/5 border-white/20 text-foreground h-12 rounded-xl" data-testid="select-experience">
+                      <SelectTrigger className="bg-white/5 border-white/20 text-foreground h-12 rounded-xl">
                         <SelectValue placeholder="Select your experience level" />
                       </SelectTrigger>
                     </FormControl>
@@ -180,7 +189,7 @@ export default function WaitlistForm({ onSuccess }: WaitlistFormProps) {
               )}
             />
 
-            {/* Referral Code (Optional) */}
+            {/* Referral Code */}
             <FormField
               control={form.control}
               name="referralCode"
@@ -188,42 +197,27 @@ export default function WaitlistForm({ onSuccess }: WaitlistFormProps) {
                 <FormItem>
                   <FormLabel className="text-foreground/70 font-medium">Referral Code (Optional)</FormLabel>
                   <FormControl>
-                    <Input
-                      {...field}
-                      placeholder="Enter code if you have one"
-                      className="bg-white/5 border-white/20 text-foreground placeholder:text-foreground/40 focus:ring-2 focus:ring-primary/50 h-12 rounded-xl"
-                      data-testid="input-referral"
-                    />
+                    <Input {...field} placeholder="Enter code if you have one" className="bg-white/5 border-white/20 text-foreground placeholder:text-foreground/40 focus:ring-2 focus:ring-primary/50 h-12 rounded-xl" />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
               )}
             />
 
-            {/* Submit Button */}
-            <Button
-              type="submit"
-              disabled={isSubmitting}
-              className="w-full h-14 rounded-full bg-gold-gradient text-white font-semibold text-lg hover:scale-105 transition-transform duration-300 shadow-xl"
-              data-testid="button-submit"
-            >
+            <Button type="submit" disabled={isSubmitting} className="w-full h-14 rounded-full bg-gold-gradient text-white font-semibold text-lg hover:scale-105 transition-transform duration-300 shadow-xl">
               {isSubmitting ? (
                 <>
-                  <Loader2 className="w-5 h-5 mr-2 animate-spin" />
-                  Joining Waitlist...
+                  <Loader2 className="w-5 h-5 mr-2 animate-spin" /> Joining Waitlist...
                 </>
               ) : (
                 <>
-                  <Check className="w-5 h-5 mr-2" />
-                  Join the Waitlist
+                  <Check className="w-5 h-5 mr-2" /> Join the Waitlist
                 </>
               )}
             </Button>
 
-            {/* Privacy Notice */}
             <p className="text-xs text-center text-foreground/50">
-              <Check className="w-3 h-3 inline mr-1 text-primary" />
-              Your information is secure and will only be used for waitlist notifications
+              <Check className="w-3 h-3 inline mr-1 text-primary" /> Your information is secure and will only be used for waitlist notifications
             </p>
           </form>
         </Form>
@@ -231,3 +225,4 @@ export default function WaitlistForm({ onSuccess }: WaitlistFormProps) {
     </div>
   );
 }
+

@@ -1,19 +1,28 @@
 <!DOCTYPE html>
-<html lang="en" class="dark">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, viewport-fit=cover" />
-    <meta name="description" content="Join the exclusive Baccarat Elite waitlist. Premium gaming experience with VIP access, professional strategies, and 24/7 support." />
-    <meta property="og:title" content="Baccarat Elite Waitlist - Exclusive VIP Access" />
-    <meta property="og:description" content="Join the most exclusive baccarat community. Limited spots available." />
-    <meta property="og:type" content="website" />
-    <title>Baccarat Elite - Exclusive Waitlist</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Baccarat Queue</title>
   </head>
   <body>
     <div id="root"></div>
+
+    <!-- Vite/React entry -->
     <script type="module" src="/src/main.tsx"></script>
+
+    <!-- Optional: disable right-click / devtools -->
+    <script>
+      // Disable right-click
+      document.addEventListener('contextmenu', function (e) { e.preventDefault(); });
+
+      // Disable common devtools shortcuts
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'F12') { e.preventDefault(); return false; }
+        if ((e.ctrlKey || e.metaKey) && e.shiftKey && (e.key === 'I' || e.key === 'J')) { e.preventDefault(); return false; }
+        if ((e.ctrlKey || e.metaKey) && e.key === 'U') { e.preventDefault(); return false; }
+      });
+    </script>
   </body>
 </html>
+

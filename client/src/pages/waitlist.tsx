@@ -9,6 +9,11 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { Check, Loader2, CheckCircle2, Spade } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
+// --- Firebase imports ---
+import { collection, addDoc, serverTimestamp } from "firebase/firestore";
+import { db } from "../firebase";
+// ------------------------
+
 const countryCodes = [
   { code: "+1", country: "🇺🇸 United States", flag: "🇺🇸", areaCode: "+1" },
   { code: "+1", country: "🇨🇦 Canada", flag: "🇨🇦", areaCode: "+1" },
@@ -65,7 +70,6 @@ const countryCodes = [
   { code: "+58", country: "🇻🇪 Venezuela", flag: "🇻🇪", areaCode: "+58" },
 ];
 
-// Phone number formatter
 const formatPhoneNumber = (value: string) => {
   const phoneNumber = value.replace(/[^\d]/g, '');
   const phoneNumberLength = phoneNumber.length;
@@ -94,16 +98,43 @@ export default function WaitlistPage() {
     },
   });
 
+  // ---------- UPDATED onSubmit: sends to Firestore ----------
   const onSubmit = async (data: InsertWaitlist) => {
     setIsSubmitting(true);
-    // TODO: Replace with actual Firebase integration
-    console.log("Waitlist signup:", { ...data, phone: `${selectedCountryCode}${data.phone}` });
-    
-    await new Promise(resolve => setTimeout(resolve, 1500));
-    
-    setIsSubmitting(false);
-    setShowSuccess(true);
+
+    try {
+      const fullPhone = `${selectedCountryCode}${data.phone}`;
+
+      // write to Firestore collection: "waitlist_submissions"
+      await addDoc(collection(db, "waitlist_submissions"), {
+        fullName: data.fullName,
+        email: data.email,
+        phone: fullPhone,
+        experienceLevel: data.experienceLevel,
+        referralCode: data.referralCode || "",
+        source: "website",
+        status: "pending",
+        submittedAt: serverTimestamp(),
+      });
+
+      toast({
+        title: "Successfully Joined!",
+        description: "Your waitlist application has been submitted.",
+      });
+
+      setShowSuccess(true);
+    } catch (error) {
+      console.error("❌ Error adding document: ", error);
+      toast({
+        title: "Error submitting form",
+        description: "Something went wrong. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
+  // ---------------------------------------------------------
 
   if (showSuccess) {
     return (
@@ -210,28 +241,6 @@ export default function WaitlistPage() {
             <div className="backdrop-blur-xl bg-card/80 border border-card-border rounded-2xl px-8 py-4 shadow-2xl shadow-primary/20 hover:shadow-primary/40 transition-shadow">
               <div className="text-3xl font-bold text-primary mb-1 drop-shadow-[0_0_10px_rgba(239,68,68,0.6)]">24/7</div>
               <div className="text-xs text-muted-foreground uppercase tracking-wider">LIVE EDUCATION</div>
-            </div>
-          </div>
-
-          {/* Features with iOS glow */}
-          <div className="flex justify-center gap-12 mb-10 text-sm">
-            <div className="flex items-start gap-3">
-              <div className="flex-shrink-0 w-5 h-5 rounded-full bg-primary/20 flex items-center justify-center mt-0.5 shadow-lg shadow-primary/50">
-                <Check className="w-3 h-3 text-primary" />
-              </div>
-              <div className="text-left">
-                <div className="font-semibold text-foreground mb-1 drop-shadow-[0_0_8px_rgba(239,68,68,0.3)]">Real-Time Baccarat video content</div>
-                <div className="text-muted-foreground">Advanced pattern analysis & table insights</div>
-              </div>
-            </div>
-            <div className="flex items-start gap-3">
-              <div className="flex-shrink-0 w-5 h-5 rounded-full bg-primary/20 flex items-center justify-center mt-0.5 shadow-lg shadow-primary/50">
-                <Check className="w-3 h-3 text-primary" />
-              </div>
-              <div className="text-left">
-                <div className="font-semibold text-foreground mb-1 drop-shadow-[0_0_8px_rgba(239,68,68,0.3)]">Elite Community</div>
-                <div className="text-muted-foreground">24/7 support from professional players</div>
-              </div>
             </div>
           </div>
         </div>
